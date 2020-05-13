@@ -18,16 +18,21 @@ public class SqliteOperator {
     }
     // 添加数据
     public void add(SmogBean sb){
+        db = dataSQlite.getWritableDatabase();
         db.execSQL("insert into smogData values(?,?,?)",
                 new Object[] { sb.getTime(), sb.getTemp(), sb.getHum() });
+        db.close();
     }
     // 删除数据
     public void delete(String name) {
+        db = dataSQlite.getWritableDatabase();
         db.execSQL("delete from smogData where name=?", new String[] { name });
+        db.close();
     }
 
     // 查询所有的联系人信息
     public List<SmogBean> queryMany() {
+        db = dataSQlite.getWritableDatabase();
         ArrayList<SmogBean> sbs = new ArrayList<SmogBean>();
         Cursor c = db.rawQuery("select * from smogData", null);
         while (c.moveToNext()) {
@@ -38,6 +43,7 @@ public class SqliteOperator {
             sbs.add(sb);
         }
         c.close();
+        db.close();
         return sbs;
     }
 
