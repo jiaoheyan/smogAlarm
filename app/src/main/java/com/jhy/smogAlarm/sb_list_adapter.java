@@ -26,7 +26,7 @@ public class sb_list_adapter extends ArrayAdapter<SmogBean> {
         TextView lv_temp=view.findViewById(R.id.item_tv_temp);
         TextView lv_hum = view.findViewById(R.id.item_tv_hum);
         lv_time.setText(sb.getTime());
-        lv_temp.setText(sb.getTime());
+        lv_temp.setText(sb.getTemp());
         lv_hum.setText(sb.getHum());
         return view;
     }

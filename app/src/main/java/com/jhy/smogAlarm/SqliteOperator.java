@@ -19,8 +19,7 @@ public class SqliteOperator {
     // 添加数据
     public void add(SmogBean sb){
         db = dataSQlite.getWritableDatabase();
-        db.execSQL("insert into smogData values(?,?,?)",
-                new Object[] { sb.getTime(), sb.getTemp(), sb.getHum() });
+        db.execSQL("insert into smogData(time,temps,hum) values('"+sb.getTime()+"','"+sb.getTemp()+"','"+sb.getHum()+"')");
         db.close();
     }
     // 删除数据
@@ -37,9 +36,9 @@ public class SqliteOperator {
         Cursor c = db.rawQuery("select * from smogData", null);
         while (c.moveToNext()) {
             SmogBean sb = new SmogBean();
-            sb.setTime(c.getString(0));
-            sb.setTemp(c.getString(1));
-            sb.setHum(c.getString(2));
+            sb.setTime(c.getString(1));
+            sb.setTemp(c.getString(2));
+            sb.setHum(c.getString(3));
             sbs.add(sb);
         }
         c.close();
